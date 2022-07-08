@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="sisa">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>SISA</title>
+    <link rel="icon" href="/img/utez/favicon.ico" />
+    <!-- Bootstrap Core CSS -->
+    <link href="/components/bootstrap/css/bootstrap_1.css" rel="stylesheet" />
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- MetisMenu CSS -->
+    <link href="/components/metisMenu/dist/metisMenu.min.css" rel="stylesheet" />
+
+    <!-- Timeline CSS -->
+    <link href="/css/general.css" rel="stylesheet" />
+    <link href="/css/timeline.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="/css/sb-admin-2.css" rel="stylesheet" />
+
+    <!-- Morris Charts CSS -->
+    <link href="/components/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/sweetalert.css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        /* Paste this css to your style sheet file or under head tag */
+        /* This only works with JavaScript, 
+            if it's not present, don't show loader */
+        .no-js #loader {
+            display: none;
+        }
+
+        .js #loader {
+            display: block;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
+
+        .se-pre-con {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url(/SISAVA/img/system/preloader.gif) center no-repeat #fff;
+        }
+    </style>
+</head>
+
+<body ng-controller="controller" ng-init="consultarFichasPagos()">
+    <div class="container-fluid">
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <!-- Navigation -->
+                <nav id="topMenu" class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation"
+                    style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                            <span class="sr-only">Navegación</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/SISAVA/iniciarSesion" style="color: #fff !important">Sistema
+                            Integral de Servicios Académicos | SISA</a>
+                    </div>
+                    <!-- /.navbar-header -->
+
+                    <ul id="rightMenu" class="nav navbar-top-links navbar-right">
+                        <li class="dropdown"></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" id="cerrarSesion" href="/SISAVA/cerrarSesion">
+                                <i class="fa fa-power-off fa-fw"></i> Salir
+                            </a>
+                        </li>
+                        <!-- /.dropdown -->
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+                    <!DOCTYPE html>
+                    <div id="leftMenu" class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li class="sidebar-search text-center hidden-xs"
+                                    style="background-color: #fff; padding: 15px 0 5px 0">
+                                    <img width="100%" src="/img/utez/lenguaje-incluyente.png" />
+                                </li>
+                                <li class="sidebar-search text-center" style="color: #fff">
+                                    <h5>Sergio Cortes Popoca</h5>
+                                    <h4>Coordinador de Servicios Escolares</h4>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-bookmark" aria-hidden="true"></i>
+                                        Permanencia<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="#">Solicitudes de Bajas</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Reporte de Bajas</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                        Planeación<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="#">Planes de Estudio</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!--            <li>
+                            <a href="/SISAVA/jsp/permanencia/evaluacionDocente/evaluacion/inicioEvaluacionDocente.jsp"><i class="fa fa-braille fa-fw"></i> Evaluación Docente</a>
+                        </li>-->
+                                <li>
+                                    <a href=""><i class="fa fa-user-o fa-fw"></i>Mi Perfil</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Clasificaciones</div>
+                            <div class="panel-body">
+                                <br />
+                                <ul class="nav nav-tabs">
+                                    <li role="presentation"><a href="/views/clasificaciones/catalogoClasificacion.html">Catálogo</a></li>
+                                    <li role="presentation"><a href="/views/clasificaciones/registrarClasificacion.html">Registrar</a></li>
+                                        <li role="presentation" class="active">
+                                            <a href="/views/clasificaciones/modificarClasificacion.html">Modificar</a>
+                                        </li>
+                                    
+                                </ul>
+                                <br />
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">Modificar</div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-11">
+                                                    <div ng-show="generacion" class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-11 col-md-offset-1">
+                                                                <div class="form-group has-success">
+                                                                    <label
+                                                                        class="control-label ">Nombre *</label>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+            
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-11 col-md-offset-1">
+                                                            <div class="form-group has-success">
+                                                                <input type="text" class="form-control"
+                                                                    ng-pattern="/^[A-Za-záéíóúÁÉÍÓÚÑñ ]{3,50}$/" autofocus required />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+            
+                                                    
+                                                    <div  class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-11 col-md-offset-1">
+                                                            <div class="form-group has-success">
+                                                                <label
+                                                                    class="control-label ">Descripción *</label>
+                                                            </div>
+                                                        </div>
+                                                </div>
+            
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-11 col-md-offset-1">
+                                                        <div class="form-group has-success">
+                                                            <input type="text" class="form-control"
+                                                                ng-pattern="/^[A-Za-záéíóúÁÉÍÓÚÑñ ]{3,50}$/" autofocus required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+            
+                                                    <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-11">
+                                                            <button type="button" class="btn btn-lg btn-warning  col-xs-offset-8  col-sm-offset-8  col-md-offset-11" name="inDescripcion" ng-model="clasificacion.descipcion">Guardar</button>
+                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                               
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script>
+        //paste this code under the head tag or in a separate js file.
+        // Wait for window load
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");
+        });
+    </script>
+    <!-- Angular -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
+    <script src="/js/angular-1.4.6.min.js"></script>
+    <script src="/js/control/permanencia/seguimiento/pagos/ajsFichaPagos.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Select JavaScript -->
+    <script src="/js/bootstrap-select.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/components/metisMenu/dist/metisMenu.min.js"></script>
+    <!--         Morris Charts JavaScript 
+                <script src="/SISAVA/components/raphael/raphael-min.js"></script>
+                <script src="/SISAVA/components/morrisjs/morris.min.js"></script>
+                <script src="/SISAVA/js/morris-data.js"></script>-->
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/sb-admin-2.js"></script>
+    <script src="/sweetalert.min_1.js"></script>
+    <script src="/SweetAlert.min.js"></script>
+    <script src="/js/smart-table.min.js"></script>
+</body>
+
+</html>
